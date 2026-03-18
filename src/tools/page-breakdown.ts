@@ -46,9 +46,9 @@ export const toolDef: ToolDefinition = {
     };
 
     const filterOp = page_path.includes("*") ? "matches" : "is";
-    const pageFilter = [filterOp, "event:page", [page_path]];
+    const pageFilterExpr = [filterOp, "event:page", [page_path]];
 
-    const combinedFilters = userFilters ? ["and", [pageFilter, userFilters]] : pageFilter;
+    const combinedFilters = userFilters ? [pageFilterExpr, userFilters] : [pageFilterExpr];
 
     const data = await client.query({
       metrics,

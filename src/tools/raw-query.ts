@@ -64,8 +64,7 @@ export const toolDef: ToolDefinition = {
       dimensions,
       filters,
       order_by,
-      limit,
-      offset,
+      pagination: limit !== undefined || offset !== undefined ? { limit, offset } : undefined,
       include,
     });
 

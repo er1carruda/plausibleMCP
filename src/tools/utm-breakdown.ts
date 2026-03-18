@@ -36,7 +36,7 @@ export const toolDef: ToolDefinition = {
       metrics: ["visitors", "visits"],
       date_range,
       dimensions: [dim],
-      limit,
+      pagination: { limit },
       filters,
     });
 

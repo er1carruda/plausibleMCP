@@ -31,8 +31,10 @@ export interface PlausibleQuery {
   dimensions?: string[];
   filters?: Filter;
   order_by?: Array<[string, "asc" | "desc"]>;
-  limit?: number;
-  offset?: number;
+  pagination?: {
+    limit?: number;
+    offset?: number;
+  };
   include?: {
     time_labels?: boolean;
     imports?: boolean;
