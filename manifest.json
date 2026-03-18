@@ -1,0 +1,60 @@
+{
+  "dxt_version": "0.1",
+  "name": "plausible-mcp",
+  "display_name": "Plausible Analytics",
+  "version": "0.1.0",
+  "description": "Query your Plausible Analytics data with AI — traffic, pages, sources, geography, devices, and conversions.",
+  "long_description": "An MCP server that connects Claude to your Plausible Analytics account. Ask questions about your website in plain language.\n\n**14 tools included:**\n- Real-time visitor count\n- Aggregate metrics (visitors, pageviews, bounce rate, etc.)\n- Time series / trend analysis\n- Top pages, landing pages, exit pages\n- Traffic sources, referrers, UTM campaigns\n- Geographic breakdown (country, region, city)\n- Device, browser, OS breakdown\n- Goal conversions\n- Custom event properties\n- Raw API query for advanced use",
+  "author": {
+    "name": "Eric Arruda",
+    "url": "https://github.com/er1carruda"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/er1carruda/plausibleMCP"
+  },
+  "homepage": "https://github.com/er1carruda/plausibleMCP",
+  "license": "MIT",
+  "keywords": ["plausible", "analytics", "stats", "traffic", "website"],
+  "server": {
+    "type": "node",
+    "entry_point": "server/index.js",
+    "mcp_config": {
+      "command": "node",
+      "args": ["${__dirname}/server/index.js"],
+      "env": {
+        "PLAUSIBLE_API_KEY": "${user_config.api_key}",
+        "PLAUSIBLE_SITE_ID": "${user_config.site_id}",
+        "PLAUSIBLE_BASE_URL": "${user_config.base_url}"
+      }
+    }
+  },
+  "user_config": {
+    "api_key": {
+      "type": "string",
+      "title": "Plausible API Key",
+      "description": "Your Plausible Analytics API key. Find it at plausible.io → Settings → API Keys.",
+      "required": true,
+      "sensitive": true
+    },
+    "site_id": {
+      "type": "string",
+      "title": "Site Domain",
+      "description": "Your site domain as registered in Plausible, e.g. example.com",
+      "required": true
+    },
+    "base_url": {
+      "type": "string",
+      "title": "Base URL (self-hosted only)",
+      "description": "Only needed for self-hosted Plausible instances. Leave empty for plausible.io.",
+      "required": false,
+      "default": "https://plausible.io"
+    }
+  },
+  "compatibility": {
+    "platforms": ["darwin", "win32", "linux"],
+    "runtimes": {
+      "node": ">=18.0.0"
+    }
+  }
+}
