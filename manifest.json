@@ -2,7 +2,7 @@
   "dxt_version": "0.1",
   "name": "plausible-mcp",
   "display_name": "Plausible Analytics",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Query your Plausible Analytics data with AI — traffic, pages, sources, geography, devices, and conversions.",
   "long_description": "An MCP server that connects Claude to your Plausible Analytics account. Ask questions about your website in plain language.\n\n**14 tools included:**\n- Real-time visitor count\n- Aggregate metrics (visitors, pageviews, bounce rate, etc.)\n- Time series / trend analysis\n- Top pages, landing pages, exit pages\n- Traffic sources, referrers, UTM campaigns\n- Geographic breakdown (country, region, city)\n- Device, browser, OS breakdown\n- Goal conversions\n- Custom event properties\n- Raw API query for advanced use",
   "author": {
