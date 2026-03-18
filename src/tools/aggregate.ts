@@ -1,15 +1,7 @@
 import { z } from "zod";
 import type { PlausibleClient } from "../plausible-client.js";
 import type { DateRange } from "../types.js";
-
-export interface ToolDefinition {
-  name: string;
-  description: string;
-  schema: Record<string, z.ZodTypeAny>;
-  handler: (client: PlausibleClient, params: Record<string, unknown>) => Promise<{
-    content: Array<{ type: "text"; text: string }>;
-  }>;
-}
+import type { ToolDefinition } from "./types.js";
 
 export const toolDef: ToolDefinition = {
   name: "get_aggregate",

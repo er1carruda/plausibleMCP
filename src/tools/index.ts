@@ -1,4 +1,4 @@
-import type { ToolDefinition } from "./aggregate.js";
+import type { ToolDefinition } from "./types.js";
 import { toolDef as currentVisitors } from "./current-visitors.js";
 import { toolDef as aggregate } from "./aggregate.js";
 import { toolDef as timeseries } from "./timeseries.js";

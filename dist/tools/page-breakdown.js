@@ -23,15 +23,20 @@ export const toolDef = {
             .array(z.string())
             .default(["visitors", "pageviews", "bounce_rate", "time_on_page"])
             .describe("Metrics to retrieve"),
+        filters: z
+            .unknown()
+            .optional()
+            .describe("Optional filter expression"),
     },
     handler: async (client, params) => {
-        const { page_path, date_range, metrics } = params;
+        const { page_path, date_range, metrics, filters: userFilters } = params;
         const filterOp = page_path.includes("*") ? "matches" : "is";
-        const filters = [filterOp, "event:page", [page_path]];
+        const pageFilter = [filterOp, "event:page", [page_path]];
+        const combinedFilters = userFilters ? ["and", [pageFilter, userFilters]] : pageFilter;
         const data = await client.query({
             metrics,
             date_range,
-            filters,
+            filters: combinedFilters,
         });
         if (data.results.length === 0) {
             return {

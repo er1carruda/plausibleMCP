@@ -1,15 +1,7 @@
 import { z } from "zod";
 import type { PlausibleClient } from "../plausible-client.js";
 import type { DateRange, PlausibleResponse } from "../types.js";
-
-export interface ToolDefinition {
-  name: string;
-  description: string;
-  schema: Record<string, z.ZodTypeAny>;
-  handler: (client: PlausibleClient, params: Record<string, unknown>) => Promise<{
-    content: Array<{ type: "text"; text: string }>;
-  }>;
-}
+import type { ToolDefinition } from "./types.js";
 
 function formatResults(
   data: PlausibleResponse,
@@ -40,21 +32,28 @@ export const toolDef: ToolDefinition = {
       .array(z.string())
       .default(["visitors", "pageviews", "bounce_rate", "time_on_page"])
       .describe("Metrics to retrieve"),
+    filters: z
+      .unknown()
+      .optional()
+      .describe("Optional filter expression"),
   },
   handler: async (client: PlausibleClient, params: Record<string, unknown>) => {
-    const { page_path, date_range, metrics } = params as {
+    const { page_path, date_range, metrics, filters: userFilters } = params as {
       page_path: string;
       date_range: DateRange;
       metrics: string[];
+      filters?: unknown;
     };
 
     const filterOp = page_path.includes("*") ? "matches" : "is";
-    const filters = [filterOp, "event:page", [page_path]];
+    const pageFilter = [filterOp, "event:page", [page_path]];
+
+    const combinedFilters = userFilters ? ["and", [pageFilter, userFilters]] : pageFilter;
 
     const data = await client.query({
       metrics,
       date_range,
-      filters,
+      filters: combinedFilters,
     });
 
     if (data.results.length === 0) {

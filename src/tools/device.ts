@@ -1,6 +1,6 @@
 import { z } from "zod";
 import type { PlausibleClient } from "../plausible-client.js";
-import type { ToolDefinition } from "./aggregate.js";
+import type { ToolDefinition } from "./types.js";
 import type { DateRange } from "../types.js";
 
 export const toolDef: ToolDefinition = {
