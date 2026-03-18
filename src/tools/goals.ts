@@ -1,6 +1,7 @@
 import { z } from "zod";
 import type { PlausibleClient } from "../plausible-client.js";
 import type { ToolDefinition } from "./aggregate.js";
+import type { DateRange } from "../types.js";
 
 export const toolDef: ToolDefinition = {
   name: "get_goal_conversions",
@@ -21,7 +22,7 @@ export const toolDef: ToolDefinition = {
   },
   handler: async (client: PlausibleClient, params: Record<string, unknown>) => {
     const { date_range, goal_filter, filters } = params as {
-      date_range: string | string[];
+      date_range: DateRange;
       goal_filter?: string;
       filters?: unknown;
     };

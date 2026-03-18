@@ -1,6 +1,7 @@
 import { z } from "zod";
 import type { PlausibleClient } from "../plausible-client.js";
 import type { ToolDefinition } from "./aggregate.js";
+import type { DateRange } from "../types.js";
 
 export const toolDef: ToolDefinition = {
   name: "get_custom_property_breakdown",
@@ -26,7 +27,7 @@ export const toolDef: ToolDefinition = {
   handler: async (client: PlausibleClient, params: Record<string, unknown>) => {
     const { property_name, date_range, limit, filters } = params as {
       property_name: string;
-      date_range: string | string[];
+      date_range: DateRange;
       limit: number;
       filters?: unknown;
     };

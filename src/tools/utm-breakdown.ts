@@ -1,6 +1,7 @@
 import { z } from "zod";
 import type { PlausibleClient } from "../plausible-client.js";
 import type { ToolDefinition } from "./aggregate.js";
+import type { DateRange } from "../types.js";
 
 export const toolDef: ToolDefinition = {
   name: "get_utm_breakdown",
@@ -24,7 +25,7 @@ export const toolDef: ToolDefinition = {
   handler: async (client: PlausibleClient, params: Record<string, unknown>) => {
     const { utm_param, date_range, limit, filters } = params as {
       utm_param: "source" | "medium" | "campaign" | "content" | "term";
-      date_range: string | string[];
+      date_range: DateRange;
       limit: number;
       filters?: unknown;
     };

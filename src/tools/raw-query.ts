@@ -1,6 +1,7 @@
 import { z } from "zod";
 import type { PlausibleClient } from "../plausible-client.js";
 import type { ToolDefinition } from "./aggregate.js";
+import type { DateRange } from "../types.js";
 
 export const toolDef: ToolDefinition = {
   name: "plausible_query",
@@ -48,7 +49,7 @@ export const toolDef: ToolDefinition = {
     const { metrics, date_range, dimensions, filters, order_by, limit, offset, include } =
       params as {
         metrics: string[];
-        date_range: string | string[];
+        date_range: DateRange;
         dimensions?: string[];
         filters?: unknown;
         order_by?: [string, "asc" | "desc"][];

@@ -1,6 +1,7 @@
 import { z } from "zod";
 import type { PlausibleClient } from "../plausible-client.js";
 import type { ToolDefinition } from "./aggregate.js";
+import type { DateRange } from "../types.js";
 
 export const toolDef: ToolDefinition = {
   name: "get_breakdown_by_location",
@@ -37,7 +38,7 @@ export const toolDef: ToolDefinition = {
     const { location_type, date_range, limit, country_filter, region_filter, filters } =
       params as {
         location_type: "country" | "region" | "city";
-        date_range: string | string[];
+        date_range: DateRange;
         limit: number;
         country_filter?: string;
         region_filter?: string;

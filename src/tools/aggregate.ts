@@ -1,5 +1,6 @@
 import { z } from "zod";
 import type { PlausibleClient } from "../plausible-client.js";
+import type { DateRange } from "../types.js";
 
 export interface ToolDefinition {
   name: string;
@@ -31,7 +32,7 @@ export const toolDef: ToolDefinition = {
   handler: async (client: PlausibleClient, params: Record<string, unknown>) => {
     const { metrics, date_range, filters } = params as {
       metrics: string[];
-      date_range: string | string[];
+      date_range: DateRange;
       filters?: unknown;
     };
 

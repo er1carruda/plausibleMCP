@@ -1,6 +1,7 @@
 import { z } from "zod";
 import type { PlausibleClient } from "../plausible-client.js";
 import type { ToolDefinition } from "./aggregate.js";
+import type { DateRange } from "../types.js";
 
 export const toolDef: ToolDefinition = {
   name: "get_breakdown_by_device",
@@ -13,7 +14,7 @@ export const toolDef: ToolDefinition = {
   },
   handler: async (client: PlausibleClient, params: Record<string, unknown>) => {
     const { date_range, filters } = params as {
-      date_range: string | string[];
+      date_range: DateRange;
       filters?: unknown;
     };
 
