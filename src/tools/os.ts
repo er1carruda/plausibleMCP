@@ -40,7 +40,7 @@ export const toolDef: ToolDefinition = {
       date_range,
       dimensions,
       filters,
-      limit,
+      pagination: { limit },
     });
 
     return {

@@ -62,7 +62,7 @@ export const toolDef: ToolDefinition = {
       metrics,
       date_range,
       dimensions: [dim],
-      limit,
+      pagination: { limit },
       filters,
     });
 

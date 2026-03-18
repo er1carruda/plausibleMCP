@@ -37,7 +37,7 @@ export const toolDef: ToolDefinition = {
       date_range,
       dimensions: [`event:props:${property_name}`],
       filters,
-      limit,
+      pagination: { limit },
     });
 
     return {
