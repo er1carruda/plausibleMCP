@@ -1,8 +1,59 @@
-# Plausible MCP Server
+# Plausible Analytics MCP Server
 
 An [MCP (Model Context Protocol)](https://modelcontextprotocol.io) server that connects AI assistants like Claude to your [Plausible Analytics](https://plausible.io) data. Ask questions about your website traffic in plain language.
 
-## Features
+## Installation
+
+### Claude Desktop — .dxt extension (easiest)
+
+Download `plausible-analytics.dxt` from the [latest release](https://github.com/er1carruda/plausibleMCP/releases) and double-click to install. Claude Desktop will prompt you for your API key and site domain — no manual config needed.
+
+### Claude Code
+
+```bash
+claude mcp add plausible node /absolute/path/to/plausibleMCP/dist/index.js \
+  -e PLAUSIBLE_API_KEY=your-api-key-here \
+  -e PLAUSIBLE_SITE_ID=your-site.com
+```
+
+### Manual (Claude Desktop config)
+
+Add to your `claude_desktop_config.json`:
+
+```json
+{
+  "mcpServers": {
+    "plausible": {
+      "command": "node",
+      "args": ["/absolute/path/to/plausibleMCP/dist/index.js"],
+      "env": {
+        "PLAUSIBLE_API_KEY": "your-api-key-here",
+        "PLAUSIBLE_SITE_ID": "your-site.com"
+      }
+    }
+  }
+}
+```
+
+### Self-hosted Plausible
+
+Add `PLAUSIBLE_BASE_URL` to point to your instance:
+
+```json
+"env": {
+  "PLAUSIBLE_API_KEY": "your-api-key-here",
+  "PLAUSIBLE_SITE_ID": "your-site.com",
+  "PLAUSIBLE_BASE_URL": "https://your-plausible-instance.com"
+}
+```
+
+## Requirements
+
+- Node.js 18+
+- A [Plausible Analytics](https://plausible.io) account (Cloud or self-hosted)
+- A Plausible Stats API key — get it at plausible.io → Settings → API Keys
+
+## Tools
 
 14 tools covering the full Plausible Stats API v2:
 
@@ -23,66 +74,6 @@ An [MCP (Model Context Protocol)](https://modelcontextprotocol.io) server that c
 | `get_custom_property_breakdown` | Breakdown by custom event properties |
 | `plausible_query` | Raw API v2 query for advanced use cases |
 
-## Requirements
-
-- Node.js 18+
-- A [Plausible Analytics](https://plausible.io) account (Cloud or self-hosted)
-- A Plausible API key with Stats API access
-
-## Setup
-
-### 1. Get a Plausible API key
-
-Go to your Plausible account → Settings → API Keys → Create API Key.
-
-### 2. Install and build
-
-```bash
-git clone https://github.com/er1carruda/plausibleMCP.git
-cd plausible-mcp
-npm install
-npm run build
-```
-
-### 3. Configure Claude Desktop
-
-Add to your `claude_desktop_config.json`:
-
-```json
-{
-  "mcpServers": {
-    "plausible": {
-      "command": "node",
-      "args": ["/absolute/path/to/plausible-mcp/dist/index.js"],
-      "env": {
-        "PLAUSIBLE_API_KEY": "your-api-key-here",
-        "PLAUSIBLE_SITE_ID": "your-site.com"
-      }
-    }
-  }
-}
-```
-
-### 4. Configure Claude Code
-
-```bash
-claude mcp add plausible node /absolute/path/to/plausible-mcp/dist/index.js \
-  -e PLAUSIBLE_API_KEY=your-api-key-here \
-  -e PLAUSIBLE_SITE_ID=your-site.com
-```
-
-### Self-hosted Plausible
-
-Add `PLAUSIBLE_BASE_URL` to point to your instance:
-
-```json
-"env": {
-  "PLAUSIBLE_API_KEY": "your-api-key-here",
-  "PLAUSIBLE_SITE_ID": "your-site.com",
-  "PLAUSIBLE_BASE_URL": "https://your-plausible-instance.com"
-}
-```
-
 ## Usage Examples
 
 Once connected, ask Claude:
@@ -99,14 +90,17 @@ Once connected, ask Claude:
 
 | Variable | Required | Default | Description |
 |----------|----------|---------|-------------|
-| `PLAUSIBLE_API_KEY` | Yes | — | Your Plausible API key |
+| `PLAUSIBLE_API_KEY` | Yes | — | Your Plausible Stats API key |
 | `PLAUSIBLE_SITE_ID` | Yes | — | Your site domain (e.g. `example.com`) |
 | `PLAUSIBLE_BASE_URL` | No | `https://plausible.io` | Base URL for self-hosted instances |
 
 ## Development
 
 ```bash
-npm run build   # Compile TypeScript
+git clone https://github.com/er1carruda/plausibleMCP.git
+cd plausibleMCP
+npm install
+npm run build   # Compile TypeScript to dist/
 npm start       # Run the server
 ```
 
