@@ -38,7 +38,7 @@ Go to your Plausible account → Settings → API Keys → Create API Key.
 ### 2. Install and build
 
 ```bash
-git clone https://github.com/your-username/plausible-mcp.git
+git clone https://github.com/er1carruda/plausibleMCP.git
 cd plausible-mcp
 npm install
 npm run build
@@ -112,4 +112,4 @@ npm start       # Run the server
 
 ## License
 
-MIT © [Eric Arruda](https://github.com/your-username)
+MIT © [Eric Arruda](https://github.com/er1carruda)
