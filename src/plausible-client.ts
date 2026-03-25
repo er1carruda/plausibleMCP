@@ -12,6 +12,15 @@ export class PlausibleClient {
   }
 
   async query(params: Omit<PlausibleQuery, "site_id">): Promise<PlausibleResponse> {
+    // Defensive: MCP clients may serialize array params as JSON strings
+    if (typeof params.filters === "string") {
+      try {
+        params = { ...params, filters: JSON.parse(params.filters) };
+      } catch {
+        // leave as-is and let the API return a meaningful error
+      }
+    }
+
     const body: PlausibleQuery = {
       site_id: this.siteId,
       ...params,

@@ -30,9 +30,9 @@ export const toolDef: ToolDefinition = {
       .optional()
       .describe("Region code to filter cities"),
     filters: z
-      .unknown()
+      .array(z.unknown())
       .optional()
-      .describe("Optional additional filter expression"),
+      .describe('Optional additional filters, e.g. [["is", "visit:source", ["Google"]]]'),
   },
   handler: async (client: PlausibleClient, params: Record<string, unknown>) => {
     const { location_type, date_range, limit, country_filter, region_filter, filters } =

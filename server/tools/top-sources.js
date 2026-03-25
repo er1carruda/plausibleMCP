@@ -16,7 +16,7 @@ export const toolDef = {
             .enum(["source", "referrer", "channel"])
             .default("source")
             .describe("Type of source breakdown"),
-        filters: z.unknown().optional().describe("Optional filter expression"),
+        filters: z.array(z.unknown()).optional().describe('Optional filters, e.g. [["is", "event:page", ["/blog"]]]'),
     },
     handler: async (client, params) => {
         const { date_range, limit, source_type, filters } = params;

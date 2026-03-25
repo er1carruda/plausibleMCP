@@ -21,9 +21,9 @@ export const toolDef: ToolDefinition = {
       .optional()
       .describe("Dimensions to group by, e.g. ['event:page', 'visit:source']"),
     filters: z
-      .unknown()
+      .array(z.unknown())
       .optional()
-      .describe("Filter expression, e.g. ['is', 'visit:source', ['Google']]"),
+      .describe('Filters, e.g. [["is", "visit:source", ["Google"]]]'),
     order_by: z
       .array(z.tuple([z.string(), z.enum(["asc", "desc"])]))
       .optional()

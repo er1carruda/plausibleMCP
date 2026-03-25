@@ -27,9 +27,9 @@ export const toolDef = {
             .default("all")
             .describe("Type of page: all, entry (landing), or exit"),
         filters: z
-            .unknown()
+            .array(z.unknown())
             .optional()
-            .describe("Optional filter expression"),
+            .describe('Optional filters, e.g. [["is", "visit:source", ["Google"]]]'),
     },
     handler: async (client, params) => {
         const { date_range, limit, page_type, filters } = params;

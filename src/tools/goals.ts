@@ -16,9 +16,9 @@ export const toolDef: ToolDefinition = {
       .optional()
       .describe("Filter to a specific goal name"),
     filters: z
-      .unknown()
+      .array(z.unknown())
       .optional()
-      .describe("Optional additional filter expression"),
+      .describe('Optional additional filters, e.g. [["is", "visit:source", ["Google"]]]'),
   },
   handler: async (client: PlausibleClient, params: Record<string, unknown>) => {
     const { date_range, goal_filter, filters } = params as {

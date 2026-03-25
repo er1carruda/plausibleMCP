@@ -29,9 +29,9 @@ export const toolDef: ToolDefinition = {
       .default("day")
       .describe("Time granularity"),
     filters: z
-      .unknown()
+      .array(z.unknown())
       .optional()
-      .describe("Optional filter expression"),
+      .describe('Optional filters, e.g. [["is", "visit:source", ["Google"]]]'),
   },
   handler: async (client: PlausibleClient, params: Record<string, unknown>) => {
     const { metrics, date_range, interval, filters } = params as {

@@ -25,9 +25,9 @@ export const toolDef = {
             .optional()
             .describe("Region code to filter cities"),
         filters: z
-            .unknown()
+            .array(z.unknown())
             .optional()
-            .describe("Optional additional filter expression"),
+            .describe('Optional additional filters, e.g. [["is", "visit:source", ["Google"]]]'),
     },
     handler: async (client, params) => {
         const { location_type, date_range, limit, country_filter, region_filter, filters } = params;

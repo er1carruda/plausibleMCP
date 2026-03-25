@@ -33,9 +33,9 @@ export const toolDef: ToolDefinition = {
       .default(["visitors", "pageviews", "bounce_rate", "time_on_page"])
       .describe("Metrics to retrieve"),
     filters: z
-      .unknown()
+      .array(z.unknown())
       .optional()
-      .describe("Optional filter expression"),
+      .describe('Optional additional filters, e.g. [["is", "visit:source", ["Google"]]]'),
   },
   handler: async (client: PlausibleClient, params: Record<string, unknown>) => {
     const { page_path, date_range, metrics, filters: userFilters } = params as {

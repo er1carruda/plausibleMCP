@@ -20,7 +20,7 @@ export const toolDef: ToolDefinition = {
       .positive()
       .default(10)
       .describe("Number of results to return"),
-    filters: z.unknown().optional().describe("Optional filter expression"),
+    filters: z.array(z.unknown()).optional().describe('Optional filters, e.g. [["is", "event:page", ["/blog"]]]'),
   },
   handler: async (client: PlausibleClient, params: Record<string, unknown>) => {
     const { utm_param, date_range, limit, filters } = params as {

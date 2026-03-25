@@ -21,7 +21,7 @@ export const toolDef: ToolDefinition = {
       .boolean()
       .default(false)
       .describe("Include browser version breakdown"),
-    filters: z.unknown().optional().describe("Optional filter expression"),
+    filters: z.array(z.unknown()).optional().describe('Optional filters, e.g. [["is", "visit:source", ["Google"]]]'),
   },
   handler: async (client: PlausibleClient, params: Record<string, unknown>) => {
     const { date_range, limit, include_version, filters } = params as {

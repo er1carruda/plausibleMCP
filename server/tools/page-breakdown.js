@@ -24,9 +24,9 @@ export const toolDef = {
             .default(["visitors", "pageviews", "bounce_rate", "time_on_page"])
             .describe("Metrics to retrieve"),
         filters: z
-            .unknown()
+            .array(z.unknown())
             .optional()
-            .describe("Optional filter expression"),
+            .describe('Optional additional filters, e.g. [["is", "visit:source", ["Google"]]]'),
     },
     handler: async (client, params) => {
         const { page_path, date_range, metrics, filters: userFilters } = params;

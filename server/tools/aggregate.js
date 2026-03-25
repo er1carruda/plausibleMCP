@@ -10,9 +10,9 @@ export const toolDef = {
             .union([z.string(), z.array(z.string())])
             .describe("Date range: '7d', '30d', 'month', 'year', 'all', or ['YYYY-MM-DD', 'YYYY-MM-DD']"),
         filters: z
-            .unknown()
+            .array(z.unknown())
             .optional()
-            .describe("Optional filter expression, e.g. [\"is\", \"visit:source\", [\"Google\"]]"),
+            .describe('Optional filters, e.g. [["is", "visit:source", ["Google"]]]'),
     },
     handler: async (client, params) => {
         const { metrics, date_range, filters } = params;

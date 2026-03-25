@@ -11,9 +11,9 @@ export const toolDef = {
             .optional()
             .describe("Filter to a specific goal name"),
         filters: z
-            .unknown()
+            .array(z.unknown())
             .optional()
-            .describe("Optional additional filter expression"),
+            .describe('Optional additional filters, e.g. [["is", "visit:source", ["Google"]]]'),
     },
     handler: async (client, params) => {
         const { date_range, goal_filter, filters } = params;

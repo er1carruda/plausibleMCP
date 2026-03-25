@@ -15,7 +15,7 @@ export const toolDef = {
             .positive()
             .default(10)
             .describe("Number of results"),
-        filters: z.unknown().optional().describe("Optional filter expression"),
+        filters: z.array(z.unknown()).optional().describe('Optional filters, e.g. [["is", "visit:source", ["Google"]]]'),
     },
     handler: async (client, params) => {
         const { property_name, date_range, limit, filters } = params;

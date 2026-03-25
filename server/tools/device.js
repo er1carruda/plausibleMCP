@@ -6,7 +6,7 @@ export const toolDef = {
         date_range: z
             .union([z.string(), z.array(z.string())])
             .describe("Date range: '7d', '30d', 'month', etc."),
-        filters: z.unknown().optional().describe("Optional filter expression"),
+        filters: z.array(z.unknown()).optional().describe('Optional filters, e.g. [["is", "visit:source", ["Google"]]]'),
     },
     handler: async (client, params) => {
         const { date_range, filters } = params;
